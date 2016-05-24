@@ -4,12 +4,13 @@
 #
 Name     : perl-Params-Util
 Version  : 1.07
-Release  : 8
+Release  : 9
 URL      : http://search.cpan.org/CPAN/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
 Summary  : 'Simple, compact and correct param-checking functions'
 Group    : Development/Tools
 License  : Artistic-1.0-Perl GPL-2.0
+Requires: perl-Params-Util-lib
 Requires: perl-Params-Util-doc
 
 %description
@@ -37,6 +38,14 @@ Group: Documentation
 doc components for the perl-Params-Util package.
 
 
+%package lib
+Summary: lib components for the perl-Params-Util package.
+Group: Libraries
+
+%description lib
+lib components for the perl-Params-Util package.
+
+
 %prep
 %setup -q -n Params-Util-1.07
 
@@ -52,7 +61,7 @@ fi
 %check
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=intel.com,localhost
+export no_proxy=localhost
 make TEST_VERBOSE=1 test
 
 %install
@@ -69,9 +78,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.22.0/x86_64-linux/Params/Util.pm
-/usr/lib/perl5/site_perl/5.22.0/x86_64-linux/auto/Params/Util/Util.so
+/usr/lib/perl5/site_perl/5.24.0/x86_64-linux/Params/Util.pm
 
 %files doc
 %defattr(-,root,root,-)
 %doc /usr/share/man/man3/*
+
+%files lib
+%defattr(-,root,root,-)
+/usr/lib/perl5/site_perl/5.24.0/x86_64-linux/auto/Params/Util/Util.so
