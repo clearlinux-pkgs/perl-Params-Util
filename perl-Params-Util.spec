@@ -4,7 +4,7 @@
 #
 Name     : perl-Params-Util
 Version  : 1.07
-Release  : 10
+Release  : 11
 URL      : http://search.cpan.org/CPAN/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
 Summary  : 'Simple, compact and correct param-checking functions'
