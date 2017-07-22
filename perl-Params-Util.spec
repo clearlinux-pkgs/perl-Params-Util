@@ -4,7 +4,7 @@
 #
 Name     : perl-Params-Util
 Version  : 1.07
-Release  : 11
+Release  : 12
 URL      : http://search.cpan.org/CPAN/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
 Summary  : 'Simple, compact and correct param-checking functions'
@@ -50,6 +50,9 @@ lib components for the perl-Params-Util package.
 %setup -q -n Params-Util-1.07
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
@@ -63,7 +66,7 @@ fi
 export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 make TEST_VERBOSE=1 test
 
 %install
@@ -80,7 +83,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.24.0/x86_64-linux-thread-multi/Params/Util.pm
+/usr/lib/perl5/site_perl/5.26.0/x86_64-linux-thread-multi/Params/Util.pm
 
 %files doc
 %defattr(-,root,root,-)
@@ -88,4 +91,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.24.0/x86_64-linux-thread-multi/auto/Params/Util/Util.so
+/usr/lib/perl5/site_perl/5.26.0/x86_64-linux-thread-multi/auto/Params/Util/Util.so
