@@ -4,7 +4,7 @@
 #
 Name     : perl-Params-Util
 Version  : 1.07
-Release  : 12
+Release  : 13
 URL      : http://search.cpan.org/CPAN/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
 Summary  : 'Simple, compact and correct param-checking functions'
@@ -83,7 +83,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.0/x86_64-linux-thread-multi/Params/Util.pm
+/usr/lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi/Params/Util.pm
 
 %files doc
 %defattr(-,root,root,-)
@@ -91,4 +91,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.0/x86_64-linux-thread-multi/auto/Params/Util/Util.so
+/usr/lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi/auto/Params/Util/Util.so
