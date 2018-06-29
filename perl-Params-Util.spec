@@ -4,14 +4,15 @@
 #
 Name     : perl-Params-Util
 Version  : 1.07
-Release  : 14
-URL      : http://search.cpan.org/CPAN/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
-Source0  : http://search.cpan.org/CPAN/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
+Release  : 15
+URL      : https://cpan.metacpan.org/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
+Source0  : https://cpan.metacpan.org/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
 Summary  : 'Simple, compact and correct param-checking functions'
 Group    : Development/Tools
 License  : Artistic-1.0-Perl GPL-2.0
 Requires: perl-Params-Util-lib
-Requires: perl-Params-Util-doc
+Requires: perl-Params-Util-license
+Requires: perl-Params-Util-man
 
 %description
 NAME
@@ -30,20 +31,29 @@ my $options = _HASH(shift)            or return undef;
 # etc...
 }
 
-%package doc
-Summary: doc components for the perl-Params-Util package.
-Group: Documentation
-
-%description doc
-doc components for the perl-Params-Util package.
-
-
 %package lib
 Summary: lib components for the perl-Params-Util package.
 Group: Libraries
+Requires: perl-Params-Util-license
 
 %description lib
 lib components for the perl-Params-Util package.
+
+
+%package license
+Summary: license components for the perl-Params-Util package.
+Group: Default
+
+%description license
+license components for the perl-Params-Util package.
+
+
+%package man
+Summary: man components for the perl-Params-Util package.
+Group: Default
+
+%description man
+man components for the perl-Params-Util package.
 
 
 %prep
@@ -56,7 +66,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 else
 %{__perl} Build.PL
 ./Build
@@ -71,6 +81,8 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/perl-Params-Util
+cp LICENSE %{buildroot}/usr/share/doc/perl-Params-Util/LICENSE
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot}
 else
@@ -85,10 +97,14 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 %defattr(-,root,root,-)
 /usr/lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi/Params/Util.pm
 
-%files doc
-%defattr(-,root,root,-)
-%doc /usr/share/man/man3/*
-
 %files lib
 %defattr(-,root,root,-)
 /usr/lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi/auto/Params/Util/Util.so
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/perl-Params-Util/LICENSE
+
+%files man
+%defattr(-,root,root,-)
+/usr/share/man/man3/Params::Util.3
