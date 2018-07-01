@@ -4,13 +4,13 @@
 #
 Name     : perl-Params-Util
 Version  : 1.07
-Release  : 17
+Release  : 18
 URL      : https://cpan.metacpan.org/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libp/libparams-util-perl/libparams-util-perl_1.07-3.debian.tar.xz
 Summary  : 'Simple, compact and correct param-checking functions'
 Group    : Development/Tools
-License  : Artistic-1.0-Perl GPL-2.0
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0 GPL-2.0
 Requires: perl-Params-Util-lib
 Requires: perl-Params-Util-license
 Requires: perl-Params-Util-man
@@ -88,6 +88,7 @@ make TEST_VERBOSE=1 test
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/perl-Params-Util
 cp LICENSE %{buildroot}/usr/share/doc/perl-Params-Util/LICENSE
+cp deblicense/copyright %{buildroot}/usr/share/doc/perl-Params-Util/deblicense_copyright
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot}
 else
@@ -109,6 +110,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 %files license
 %defattr(-,root,root,-)
 /usr/share/doc/perl-Params-Util/LICENSE
+/usr/share/doc/perl-Params-Util/deblicense_copyright
 
 %files man
 %defattr(-,root,root,-)
