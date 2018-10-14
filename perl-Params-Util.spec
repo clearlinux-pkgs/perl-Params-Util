@@ -4,16 +4,16 @@
 #
 Name     : perl-Params-Util
 Version  : 1.07
-Release  : 22
+Release  : 23
 URL      : https://cpan.metacpan.org/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/A/AD/ADAMK/Params-Util-1.07.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libi/libio-handle-util-perl/libio-handle-util-perl_0.01-2.debian.tar.xz
 Summary  : 'Simple, compact and correct param-checking functions'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0 GPL-2.0
-Requires: perl-Params-Util-lib
-Requires: perl-Params-Util-license
-Requires: perl-Params-Util-man
+Requires: perl-Params-Util-lib = %{version}-%{release}
+Requires: perl-Params-Util-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 
 %description
 NAME
@@ -32,10 +32,20 @@ my $options = _HASH(shift)            or return undef;
 # etc...
 }
 
+%package dev
+Summary: dev components for the perl-Params-Util package.
+Group: Development
+Requires: perl-Params-Util-lib = %{version}-%{release}
+Provides: perl-Params-Util-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-Params-Util package.
+
+
 %package lib
 Summary: lib components for the perl-Params-Util package.
 Group: Libraries
-Requires: perl-Params-Util-license
+Requires: perl-Params-Util-license = %{version}-%{release}
 
 %description lib
 lib components for the perl-Params-Util package.
@@ -49,19 +59,11 @@ Group: Default
 license components for the perl-Params-Util package.
 
 
-%package man
-Summary: man components for the perl-Params-Util package.
-Group: Default
-
-%description man
-man components for the perl-Params-Util package.
-
-
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n Params-Util-1.07
-mkdir -p %{_topdir}/BUILD/Params-Util-1.07/deblicense/
+cd ..
+%setup -q -T -D -n Params-Util-1.07 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Params-Util-1.07/deblicense/
 
 %build
@@ -86,13 +88,13 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-Params-Util
-cp LICENSE %{buildroot}/usr/share/doc/perl-Params-Util/LICENSE
-cp deblicense/copyright %{buildroot}/usr/share/doc/perl-Params-Util/deblicense_copyright
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-Params-Util
+cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Params-Util/LICENSE
+cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Params-Util/deblicense_copyright
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -101,17 +103,17 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi/Params/Util.pm
+/usr/lib/perl5/vendor_perl/5.26.1/x86_64-linux-thread-multi/Params/Util.pm
+
+%files dev
+%defattr(-,root,root,-)
+/usr/share/man/man3/Params::Util.3
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/x86_64-linux-thread-multi/auto/Params/Util/Util.so
+/usr/lib/perl5/vendor_perl/5.26.1/x86_64-linux-thread-multi/auto/Params/Util/Util.so
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/perl-Params-Util/LICENSE
-/usr/share/doc/perl-Params-Util/deblicense_copyright
-
-%files man
-%defattr(-,root,root,-)
-/usr/share/man/man3/Params::Util.3
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-Params-Util/LICENSE
+/usr/share/package-licenses/perl-Params-Util/deblicense_copyright
